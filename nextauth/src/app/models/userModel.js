@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
         unique : true
     },
     password : {
-        type : true,
+        type : String,
         required : [true, "Please provide password"]
     },
     isAdmin:{
@@ -30,5 +30,6 @@ const userSchema = new mongoose.Schema({
 
 });
 
-const User = mongoose.model.Users || mongoose.model("Users", userSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+
 export default User;

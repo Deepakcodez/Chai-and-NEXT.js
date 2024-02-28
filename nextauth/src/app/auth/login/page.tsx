@@ -1,8 +1,9 @@
 "use client";
 
-
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
+
 // import { useRouter } from "next/navigation";
 interface UserDataType {
   email: string;
@@ -13,9 +14,14 @@ export default function login() {
     email: "",
     password: "",
   });
-  const loginHandler = (e: React.FormEvent) => {
+  const loginHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('>>>>>>>>>>>', userData)
+    try {
+      const response = await axios.post("/api/auth/login", userData);
+      console.log(">>>>>>>>>>>res", response);
+    } catch (error) {
+      console.log(">>>>>>>>>>>", error);
+    }
   };
   return (
     <>
@@ -50,8 +56,6 @@ export default function login() {
               </p>
 
               <form action="#" className="mt-8  col-span-6 gap-6">
-              
-
                 <div className="col-span-6">
                   <label
                     htmlFor="Email"

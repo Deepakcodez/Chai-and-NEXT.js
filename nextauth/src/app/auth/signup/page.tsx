@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import axios from 'axios';
 // import { useRouter } from "next/navigation";
 interface UserDataType {
   name: string;
@@ -15,9 +16,14 @@ export default function login() {
     email: "",
     password: "",
   });
-  const signUpHandler = (e: React.FormEvent) => {
+  const signUpHandler = async(e: React.FormEvent) => {
     e.preventDefault();
-    console.log('>>>>>>>>>>>', userData)
+    try {
+         const response = await axios.post('/api/auth/signup', userData)
+         console.log('>>>>>>>>>>>', response)
+    } catch (error) {
+      console.log('>>>>>>>>>>>', error)
+    }
   };
   return (
     <>
